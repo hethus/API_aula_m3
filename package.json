@@ -1,0 +1,27 @@
+{
+  "name": "api_aula_m3",
+  "version": "1.0.0",
+  "description": "Projeto de API criado com base nas aulas do terceiro modulo de Full Stack.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hethus/API_aula_m3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hethus/API_aula_m3/issues"
+  },
+  "homepage": "https://github.com/hethus/API_aula_m3#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
