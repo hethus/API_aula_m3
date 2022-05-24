@@ -4,10 +4,10 @@ import PaletasServices from "../services/paletas.service";
 const paletasServices = new PaletasServices();
 
 class PaletasControllers {
-  listarTodas(req, res) {
+  async listarTodas(req, res) {
   
     try{
-      const paletas = paletasServices.listarTodas();
+      const paletas = await paletasServices.listarTodas();
 
       res.send(paletas);
     }catch(error){
@@ -15,45 +15,44 @@ class PaletasControllers {
     }
   }
 
-  listarUmaPaletaPorId(req, res) {
-  
-    const id = +req.params.id;
+  async listarUmaPaletaPorId(req, res) {
+    const id = req.params.id;
 
 
-    const paleta = paletasServices.listarUmaPaletaPorId({ id });
+    const paleta = await paletasServices.listarUmaPaletaPorId({ id });
 
     res.send(paleta);
 
   }
 
-  criarNovaPaleta(req, res) {
+  async criarNovaPaleta(req, res) {
     
     const { sabor, descricao, foto, preco } = req.body;
 
-    const novaPaleta = paletasServices.criarNovaPaleta({ sabor, descricao, foto, preco });
+    const novaPaleta = await paletasServices.criarNovaPaleta({ sabor, descricao, foto, preco });
   
     res.status(201).send(novaPaleta);
     
   }
 
-  atualizarPaleta(req, res) {
+  async atualizarPaleta(req, res) {
       
     const { sabor, descricao, foto, preco } = req.body;
     
-    const id = +req.params.id;
+    const id = req.params.id;
 
-    const paletaSelecionada = paletasServices.atualizarPaleta({ sabor, descricao, foto, preco, id });
+    const paletaSelecionada = await paletasServices.atualizarPaleta({ sabor, descricao, foto, preco, id });
 
     res.send(paletaSelecionada);
   }
 
-  excluirPaleta(req, res) {
+  async excluirPaleta(req, res) {
         
-    const id = +req.params.id;
+    const id = req.params.id;
   
-    paletasServices.excluirPaleta({ id });
+    const paleta = await paletasServices.excluirPaleta({ id });
   
-    res.sendStatus(204);
+    res.status(200).send(paleta);
   }
 }
 

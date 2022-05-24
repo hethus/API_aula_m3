@@ -1,28 +1,12 @@
-const paletas = [
-  {
-    id: 1,
-    sabor: "Açaí com Leite Condensado",
-    descricao:
-      "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
-    foto: "assets/images/acai-com-leite-condensado.png",
-    preco: 10.0,
-  },
-  {
-    id: 2,
-    sabor: "Banana com Nutella",
-    descricao:
-      "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
-    foto: "assets/images/banana-com-nutella.png",
-    preco: 10.0,
-  },
-  {
-    id: 3,
-    sabor: "Chocolate Belga",
-    descricao:
-      "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
-    foto: "assets/images/chocolate-belga.png",
-    preco: 7.0,
-  },
-];
+import { connect } from "mongoose";
 
-export default paletas;
+export const conectarDatabase = async () => {
+  connect("mongodb://localhost:27017/Elgeladon", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(() => {
+    console.log("MongoDB conectado")
+  }).catch(err => {
+    console.log(`Erro na conexão com o MongoDB: ${err}`)
+  });
+};

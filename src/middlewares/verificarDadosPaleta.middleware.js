@@ -1,5 +1,3 @@
-import paletas from "../database";
-
 const verificarIdPaletaMiddleware = (req, res, next) => {
   const { sabor, descricao, foto, preco } = req.body;
 

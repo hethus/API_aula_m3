@@ -1,59 +1,56 @@
-import paletas from "../database";
+import Paleta from "../models/paleta.model";
 
 class PaletasServices {
-  listarTodas() {
+  async listarTodas() {
+
+    const paletas = await Paleta.find();
 
     if(paletas.length === 0) {
-      throw { status: 404, message: "Não há paletas cadastradas" };
+      throw { status: 404, message: "Nenhuma paleta encontrada!" };
     }
 
     return paletas;
   }
 
-  listarUmaPaletaPorId({ id }) {
-    const paletaSelecionada = paletas.find((paleta) => paleta.id === id);
+  async listarUmaPaletaPorId({ id }) {
+    const paletaSelecionada = await Paleta.findById(id);
 
     return paletaSelecionada;
   }
 
-  criarNovaPaleta({ sabor, descricao, foto, preco }) {
-    const novoId = paletas.length === 0 ? 1 : paletas[paletas.length - 1].id + 1;
-
+  async criarNovaPaleta({ sabor, descricao, foto, preco }) {
     const novaPaleta = {
-      id: novoId,
       sabor,
       descricao,
       foto,
       preco,
     };
 
-    paletas.push(novaPaleta);
+    const paleta = await Paleta.create(novaPaleta);
 
-    return novaPaleta;
+    return paleta;
   }
 
-  atualizarPaleta({ sabor, descricao, foto, preco, id }) {
+  async atualizarPaleta({ sabor, descricao, foto, preco, id }) {
     const paletaSelecionada = {
-      id,
       sabor,
       descricao,
       foto,
       preco,
     }
 
-    const paletaIndex = paletas.findIndex((paleta) => paleta.id === id);
+    await Paleta.updateOne({ _id: id }, paletaSelecionada);
 
-    paletas[paletaIndex] = paletaSelecionada;
+    const paleta = await Paleta.findById(id);
 
-    return paletaSelecionada;
+    return paleta;
   }
 
-  excluirPaleta({ id }) {
-    const paletaIndex = paletas.findIndex((paleta) => paleta.id === id);
-
-    paletas.splice(paletaIndex, 1);
+  async excluirPaleta({ id }) {
+    const paleta = await Paleta.findByIdAndDelete(id);
+  
+    return paleta;
   }
-
 }
 
 export default PaletasServices;
