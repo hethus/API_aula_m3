@@ -1,9 +1,9 @@
-import app from "./app";
-import { conectarDatabase } from "./database";
+import app from './app';
+import { conectarAoDatabase } from './database';
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 app.listen(port, () => {
-  conectarDatabase();
-  console.log(`app listening on port ${port}!`);
+  conectarAoDatabase();
+  console.log(`A aplicação está rodando na porta http://localhost:${port}`);
 });
